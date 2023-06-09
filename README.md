@@ -65,6 +65,34 @@ pip install -r requirements.txt
 conda env create --name PrimeKG --file=environments.yml
 ```
 
+## Apple Silicon Environment Setup
+1. Install [Docker Desktop](https://docker.com/) for **Apple Silicon/Chip**. For basic use in this repo, you may need to increase the default resource constraints to at least:
+  * CPUs => 2
+  * Memory => 4GB
+  * Swap => 2GB
+
+2. Create an image builder for x86 architecture:
+    ```shell
+    docker buildx create --platform linux/amd64 --driver docker-container --name intel_builder
+    ```
+
+3. Use the builder to create an intel-platform runnable docker image, from the project root path:
+    ```shell
+    docker buildx build . -t primekg --progress plain --builder intel_builder --load
+    ```
+
+4. Run the image:
+    ```shell
+    docker buildx build . -t primekg --progress plain --builder intel_builder --load
+    ```shell
+    docker run -it --platform linux/amd64 -p 8888:8888 primekg
+    ```
+
+6. Open the jupyter notebook locally, at `localhost:8888/tree` (though you'll probably want to just copy link *with the security token in it*, produced in the container output... This effectively runs `jupyter notebook` for you and makes it accessible on the host apple machine's browser)
+
+7. ...Profit!
+
+
 ## Using PrimeKG
 
 For a quick start in Python, you can download the raw data files in `.csv` format directly from [Harvard Dataverse](https://doi.org/10.7910/DVN/IXA7BM) or load PrimeKG using the following community dataloaders.
