@@ -12,7 +12,6 @@ primekg.query('y_type=="exposure"|x_type=="exposure"').x_type.drop_duplicates()
 #     'x_source', 'y_index', 'y_id', 'y_type', 'y_name', 'y_source'],
 #     dtype='object')
 
-
 lookhere = ["anatomy", "biological_process", "disease", "drug", "exposure"]
 ignorehere = ["gene/protein", "molecular_function", "cellular_component", "pathway"]
 
@@ -41,8 +40,8 @@ umls_desc_df = umls_desc_df.loc[umls_desc_df.SUPPRESS == 'N'][["CUI", "DEF"]]
 import spacy
 import scispacy
 from scispacy.linking import EntityLinker
-# nlp = spacy.load("en_core_sci_sm")
-nlp = spacy.load("en_ner_bc5cdr_md")
+nlp = spacy.load("en_core_sci_sm")
+# nlp = spacy.load("en_ner_bc5cdr_md")
 # nlp = spacy.load("en_ner_bionlp13cg_md")
 nlp.add_pipe("scispacy_linker", config={"linker_name": "umls"})
 
@@ -75,11 +74,13 @@ for entity in doc.ents:
 # umls_lookup_df.loc[umls_lookup_df.cui == cui]
 
 
-
-
-
 # umls_lookup_df.loc[umls_lookup_df.cui == cui]
 
 # umls_desc_df[["CUI", "DEF"]]
 
 # umls_desc_df.columns
+
+# synonyms sourced from https://github.com/lisavirginia/clinical-abbreviations/tree/master/metainventory
+synonyms_df = pd.read_csv("MetainventoryAuxiliary_Version1.0.0.csv", sep="|", low_memory=False)
+# synonyms_df[["LF", "NormLF"]]
+synonyms_df["LF"]
