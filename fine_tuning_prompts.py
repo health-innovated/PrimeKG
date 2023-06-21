@@ -79,4 +79,4 @@ print(f"Price to tune over the '{model}' model (rate of {pricing * 1000} / 1K to
 
 # openai api fine_tunes.follow -i ft-di9xd4HaK01UFmZXfeNkWGs7
 
-# openai api completions.create -m <FINE_TUNED_MODEL> -p <YOUR_PROMPT>
+# openai api completions.create -m 'ft-di9xd4HaK01UFmZXfeNkWGs7' -p 'How should I treat a patient with heartburn?'
