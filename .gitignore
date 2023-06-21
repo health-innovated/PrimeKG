@@ -1,2 +1,5 @@
 kg.csv
 umls*.csv
+*.env
+Metainventory*.csv
+prompt*.jsonl
